@@ -56,14 +56,33 @@ if __name__ == "__main__":
     N = args.number if args.number else 1
     file = open(args.output, "a") if args.output else sys.stdout
 
-    print("Generating accounts in the following format:", file=sys.stdout)
-    print("NICKNAME:USERNAME:EMAIL:PASSWORD\n", file=sys.stdout)
+    print("Generating accounts in the following format:")
+    print("NICKNAME:USERNAME:EMAIL:PASSWORD\n")
+
     for i in range(N):
         result = generate()
         if result[0]:
             print(result[1], file=file)
             if file is not sys.stdout:
                 print(result[1], file=sys.stdout)
+
+            # Write email, username, nickname, and password to separate files
+            email_file = open("email.txt", "a")
+            username_file = open("username.txt", "a")
+            nickname_file = open("nickname.txt", "a")
+            password_file = open("password.txt", "a")
+
+            nickname, username, email, password = result[1].split(":")
+            email_file.write(email + "\n")
+            username_file.write(username + "\n")
+            nickname_file.write(nickname + "\n")
+            password_file.write(password + "\n")
+
+            email_file.close()
+            username_file.close()
+            nickname_file.close()
+            password_file.close()
+
         else:
             print(str(i+1)+"/"+str(N)+": "+result[1], file=sys.stdout)
 
