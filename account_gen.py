@@ -85,4 +85,7 @@ if __name__ == "__main__":
                 email_file.write(email + "\n")
             with open("username.txt", "a") as username_file:
                 username_file.write(username + "\n")
-            with open("nickname.txt", "a") as
+            with open("nickname.txt", "a") as nickname_file:
+                nickname_file.write(nickname + "\n")
+            with open("password.txt", "a") as password_file:
+                password_file.write(password + "\n") 
