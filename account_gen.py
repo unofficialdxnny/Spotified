@@ -88,4 +88,4 @@ if __name__ == "__main__":
             with open("nickname.txt", "a") as nickname_file:
                 nickname_file.write(nickname + "\n")
             with open("password.txt", "a") as password_file:
-                password_file.write(password + "\n") 
+                password_file.write(password + "\n")
