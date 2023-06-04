@@ -4,7 +4,7 @@ Perform automated actions on Spotify
 ---- 
 
 <p align="center">
-<img src="https://www.instafollowers.co/img/uploads/spotify-followers.png">
+<img src="https://github.com/unofficialdxnny/Spotified/assets/82535503/0b0d52f2-1c4d-4a17-8061-710c3e16b753">
 </p>
 
 <br>
