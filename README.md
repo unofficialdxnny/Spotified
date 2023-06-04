@@ -19,7 +19,9 @@ The features that are included with Spotified are:
 
 # Usage
 - Before running ensure that the `username.txt` and `password.txt` files are empty.
-- For a fully automatic process open `main.py` and change the url on line `161` from `https://open.spotify.com/user/ahmeddanial` to `https://open.spotify.com/user/your_username` (unless you want to generate followers for me :)
+- `python follower.py`
+- Type in the username to follow (not display name)
+
 
 <br>
 
