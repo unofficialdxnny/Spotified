@@ -12,9 +12,14 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
 from time import sleep
 import os
+import ctypes
 
 
-username = input("username> ")
+def set_terminal_title(title):
+    ctypes.windll.kernel32.SetConsoleTitleW(title)
+
+followers_count = 0
+
 
 while True:
     def generate_random_string(length):
@@ -163,7 +168,7 @@ while True:
                     driver.find_element(By.XPATH, '/html/body/div[13]/div[3]/div/div[1]/div/div[2]/div/button[1]').click()
     
                     ## Search
-                    driver.get(f'https://open.spotify.com/user/{username}')
+                    driver.get(f'https://open.spotify.com/user/ahmeddanial')
                     sleep(4)
     
                     ## Follow
@@ -178,5 +183,9 @@ while True:
                         pass
                     
                     driver.quit()
+                    # Change the terminal title to "followers | x" where x is the number of followers
+                    followers_count = followers_count+1  # Replace with the actual number of followers
+                    new_title = f"followers | {followers_count}"
+                    set_terminal_title(new_title)
     
                     break
