@@ -13,6 +13,9 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from time import sleep
 import os
 
+
+username = input("username> ")
+
 while True:
     def generate_random_string(length):
         characters = string.ascii_lowercase + string.digits
@@ -90,12 +93,12 @@ while True:
     
                 nickname, username, email, password = account_info.split(":")
     
-                with open("email.txt", "a") as email_file:
-                    email_file.write(email + "\n")
+                #with open("email.txt", "a") as email_file:
+                 #   email_file.write(email + "\n")
                 with open("username.txt", "a") as username_file:
                     username_file.write(username + "\n")
-                with open("nickname.txt", "a") as nickname_file:
-                    nickname_file.write(nickname + "\n")
+                #with open("nickname.txt", "a") as nickname_file:
+                 #   nickname_file.write(nickname + "\n")
                 with open("password.txt", "a") as password_file:
                     password_file.write(password + "\n")
     
@@ -121,7 +124,7 @@ while True:
     
                 options = Options()
                 options.page_load_strategy = 'eager'
-                options.headless = False
+                ## options.add_argument("--headless")
                 options.add_argument('--disable-blink-features=AutomationControlled')
                 options.add_argument('--disable-blink-features=AutomationControlled')
                 options.add_argument("--log-level=OFF")
@@ -158,7 +161,7 @@ while True:
                     driver.find_element(By.XPATH, '/html/body/div[13]/div[3]/div/div[1]/div/div[2]/div/button[1]').click()
     
                     ## Search
-                    driver.get('https://open.spotify.com/user/ahmeddanial')
+                    driver.get(f'https://open.spotify.com/user/{username}')
                     sleep(4)
     
                     ## Follow
