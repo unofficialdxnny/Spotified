@@ -4,7 +4,7 @@ Perform automated actions on Spotify
 ---- 
 
 <p align="center">
-<img src="https://github.com/unofficialdxnny/Spotified/assets/82535503/0b0d52f2-1c4d-4a17-8061-710c3e16b753">
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/e438e7153848787.633b3013a2f13.gif">
 </p>
 
 <br>
