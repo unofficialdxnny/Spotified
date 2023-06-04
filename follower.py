@@ -100,11 +100,11 @@ while True:
     
                 #with open("email.txt", "a") as email_file:
                  #   email_file.write(email + "\n")
-                with open("username.txt", "a") as username_file:
+                with open("./ACC/username.txt", "a") as username_file:
                     username_file.write(username + "\n")
                 #with open("nickname.txt", "a") as nickname_file:
                  #   nickname_file.write(nickname + "\n")
-                with open("password.txt", "a") as password_file:
+                with open("./ACC/password.txt", "a") as password_file:
                     password_file.write(password + "\n")
     
                 os.system('cls')
@@ -139,7 +139,7 @@ while True:
                 options.add_experimental_option('excludeSwitches', ['enable-logging'])
     
                 ## open required files for credentials
-                with open("username.txt", "r") as username_file, open("password.txt", "r") as password_file:
+                with open("./ACC/username.txt", "r") as username_file, open("./ACC/password.txt", "r") as password_file:
                     username_line = username_file.readlines()
                     password_line = password_file.readlines()
     
@@ -177,9 +177,9 @@ while True:
                     driver.get("https://open.spotify.com/logout")
     
                     ## Clear credentials files
-                    with open("username.txt", "w"):
+                    with open("./ACC/username.txt", "w"):
                         pass
-                    with open("password.txt", "w"):
+                    with open("./ACC/password.txt", "w"):
                         pass
                     
                     driver.quit()
