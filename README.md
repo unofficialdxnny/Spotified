@@ -13,7 +13,7 @@ Perform automated actions on Spotify
 
 The features that are included with Spotified are:
 - Followers 
-- ~~Likes~~
+- Likes
 
 <br>
 
