@@ -19,7 +19,8 @@ The features that are included with Spotified are:
 
 # Usage
 - Before running ensure that the `username.txt` and `password.txt` files are empty.
-- `python follower.py`
+- `python follower.py` for followers.
+- `python likes.py` for likes.
 - Type in the username to follow (not display name)
 
 
