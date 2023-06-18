@@ -185,7 +185,7 @@ while True:
                     
                     driver.quit()
                     # Change the terminal title to "followers | x" where x is the number of followers
-                    followers_count = followers_count+1  # Replace with the actual number of followers
+                    likes_count = followers_count+1  # Replace with the actual number of followers
                     new_title = f"followers | {followers_count}"
                     set_terminal_title(new_title)
     
