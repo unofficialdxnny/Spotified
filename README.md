@@ -1,44 +1,88 @@
+
 # Spotified
-Perform automated actions on Spotify
 
----- 
+This Python script automates the process of creating multiple Spotify accounts. It uses Selenium to interact with the Spotify signup page, filling in user details such as email, password, display name, and date of birth.
 
-<p align="center">
-<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/e438e7153848787.633b3013a2f13.gif">
-</p>
+## Table of Contents
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [How the Code Works](#how-the-code-works)
+- [Entering Spotify URL](#entering-spotify-url)
+- [ChromeDriver Installation](#chromedriver-installation)
+- [Contributing](#contributing)
 
-<br>
+## Requirements
+- Python 3.x
+- Selenium library
+- JSON files containing first and last names
 
-# Features
+## Installation
 
-The features that are included with Spotified are:
-- Followers 
-- Likes
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/unofficialdxnny/Spotified.git
+   cd Spotified
+   ```
 
-<br>
+2. **Install required Python libraries:**
+   ```bash
+   pip install selenium
+   ```
 
-# Usage
-- Before running ensure that the `username.txt` and `password.txt` files are empty.
-- `python follower.py` for followers.
-- `python likes.py` for likes.
-- Type in the username to follow (not display name)
+3. **Download ChromeDriver:**
+   - Visit the [ChromeDriver download page](https://chromedriver.chromium.org/downloads).
+   - Select the version that matches your installed Chrome version (you can check your Chrome version by going to `chrome://settings/help`).
+   - Download the appropriate executable for your OS (Windows, Mac, Linux).
+   - Place the `chromedriver.exe` file in the root directory of the project.
 
+## Usage
+1. Ensure you have the `firstnames.json` and `lastnames.json` files in the `data` directory, containing first and last names respectively.
+2. Update the code with your Spotify profile or playlist URL (see instructions below).
+3. Run the script:
+   ```bash
+   python main.py
+   ```
+4. The script will run in a loop, creating Spotify accounts and saving the details to `account_details.txt` in the `data/accounts` directory.
 
-<br>
+## How the Code Works
+- The script starts by importing necessary libraries and defining functions.
+- It loads first and last names from JSON files and sets up a Chrome browser instance using Selenium.
+- Random names, emails, and dates of birth are generated.
+- The script navigates to the Spotify signup page and fills out the form using the generated details.
+- Once an account is created, it navigates to a specified URL (either your Spotify profile or a playlist).
+- Account details are saved in a text file for future reference.
 
-## Features ToAdd
-- Proxy Support
-- Reallistic Accounts
-- Likes
+## Entering Spotify URL
+To make the script navigate to your Spotify profile or playlist after creating an account, follow these steps:
 
+1. Open the `main.py` file in a text editor.
+2. Find the section where the script navigates to a URL. It will look something like this:
+   ```python
+   driver.get('https://open.spotify.com/playlist/your_playlist_id')
+   ```
+3. Replace the URL in quotes with the URL of your desired Spotify profile or playlist.
+   - For a playlist, it will look like: `https://open.spotify.com/playlist/your_playlist_id`
+   - For a profile, it will look like: `https://open.spotify.com/user/your_profile_id`
+4. Save the file.
 
-----
+## ChromeDriver Installation
+To install ChromeDriver for your specific version of Chrome:
 
-# Socials
+1. **Check your Chrome version:**
+   - Open Chrome and go to `chrome://settings/help` to find your version number.
 
-Follow me on my social media because you love me :)
+2. **Download the matching ChromeDriver:**
+   - Visit the [ChromeDriver downloads page](https://chromedriver.chromium.org/downloads).
+   - Click on the version that matches your Chrome version.
+   - Download the appropriate file for your operating system.
 
-<a href="https://instagram.com/unofficialdxnny">
-<img src="https://cdn4.iconfinder.com/data/icons/social-media-2210/24/Instagram-512.png" width="32"></a>
-<a href="https://discord.gg/8WyFZF3kqn">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="32"></a>
+3. **Extract and place the executable:**
+   - Extract the downloaded file (if compressed) and place the `chromedriver.exe` in the root directory of your project.
+
+## Contributing
+Contributions are welcome! If you have suggestions for improvements or encounter any issues, please open an issue or submit a pull request.
+
+---
+
+**Disclaimer:** This script is intended for educational purposes only. Please ensure that your use of this script complies with Spotify's terms of service.
