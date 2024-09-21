@@ -9,6 +9,31 @@ from selenium.webdriver.chrome.options import Options
 from time import sleep
 import json
 from datetime import datetime, timedelta
+import logging
+from colorama import Fore, Style, init
+
+# Initialize colorama
+init(autoreset=True)
+
+# Configure logging with colors
+logging.basicConfig(level=logging.INFO, format="%(message)s")
+
+
+# Function to log in color
+def log_info(message):
+    logging.info(f"{Fore.YELLOW}{message}")
+
+
+def log_success(message):
+    logging.info(f"{Fore.GREEN}{message}")
+
+
+def log_error(message):
+    logging.error(f"{Fore.RED}{message}")
+
+
+# Suppress selenium logs
+logging.getLogger("selenium").setLevel(logging.CRITICAL)
 
 
 # Function to generate a random DOB
@@ -35,6 +60,10 @@ with open("./data/lastnames.json") as f:
 # Set up Chrome options
 options = Options()
 options.add_experimental_option("detach", True)
+options.add_argument("--log-level=3")  # Suppress logging (INFO, WARNING, ERROR)
+
+# Optional: Redirect ChromeDriver logs to null
+options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 while True:
     # Initialize the Chrome driver with options
@@ -45,6 +74,7 @@ while True:
     random_lastname = random.choice(lastnames)
     display_name = f"{random_firstname} {random_lastname}"
 
+    log_info("Navigating to Spotify signup page...")
     # URL of the form to be filled
     url = "https://www.spotify.com/uk/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F"
     driver.get(url)
@@ -53,6 +83,7 @@ while True:
 
     # Check for the visibility of the button specified by the given XPath
     try:
+        log_info("Checking for cookies button...")
         cookies_button = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(
                 (
@@ -62,21 +93,28 @@ while True:
             )
         )
         cookies_button.click()
-        print("Clicked the visible button.")
+        log_success("Clicked the cookies button.")
     except Exception as e:
-        print("The specified button was not visible or could not be clicked:", e)
+        log_error(f"Failed to click the cookies button: {e}")
 
     sleep(0.5)
 
     # Wait for the email field to be available
-    email = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "username"))
-    )
+    try:
+        log_info("Waiting for email field to appear...")
+        email = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "username"))
+        )
+        log_success("Email field found.")
+    except Exception as e:
+        log_error(f"Email field not found: {e}")
 
     # Fill the form with random details
     characters = string.ascii_letters + string.digits
     random_email = "".join(random.choice(characters) for _ in range(25)) + "@gmail.com"
     email.send_keys(random_email)
+
+    log_info(f"Filled in random email: {random_email}")
 
     sleep(0.5)
     next_button = driver.find_element(
@@ -91,6 +129,7 @@ while True:
         "/html/body/div[1]/main/main/section/div/form/div[1]/div[2]/div/section/div[2]/div/div[2]/div[1]/input",
     )
     password_field.send_keys(password)
+    log_info("Entered password.")
 
     sleep(0.5)
     next_button = driver.find_element(
@@ -102,6 +141,7 @@ while True:
 
     # Wait for the display name input to be available and send the combined name
     try:
+        log_info("Waiting for display name input...")
         display_name_input = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(
                 (
@@ -111,9 +151,9 @@ while True:
             )
         )
         display_name_input.send_keys(display_name)
-        print(f"Sent display name: {display_name}")
+        log_success(f"Sent display name: {display_name}")
     except Exception as e:
-        print("The display name input was not found:", e)
+        log_error(f"Failed to send display name: {e}")
 
     sleep(0.5)
 
@@ -124,6 +164,8 @@ while True:
         "/html/body/div[1]/main/main/section/div/form/div[1]/div[2]/div/section/div[3]/div[2]/div[2]/div/input[1]",
     )
     d_input.send_keys(day)
+
+    log_info(f"Entered day: {day}")
 
     sleep(0.5)
 
@@ -149,6 +191,8 @@ while True:
     first_letter = month_names[month - 1][0].upper()
     month_input.send_keys(first_letter)
 
+    log_info(f"Entered month: {month_names[month - 1]}")
+
     sleep(0.5)
 
     # Continue with the year
@@ -157,6 +201,7 @@ while True:
         "/html/body/div[1]/main/main/section/div/form/div[1]/div[2]/div/section/div[3]/div[2]/div[2]/div/input[2]",
     )
     year_input.send_keys(year)
+    log_info(f"Entered year: {year}")
 
     sleep(0.5)
 
@@ -165,7 +210,7 @@ while True:
 
     # Randomly select a gender
     selected_gender = random.choice(gender_options)
-    print(f"Selected gender: {selected_gender}")
+    log_info(f"Selected gender: {selected_gender}")
 
     # Define the XPaths for each gender option
     gender_xpaths = {
@@ -180,9 +225,9 @@ while True:
     try:
         gender_input = driver.find_element(By.XPATH, gender_xpaths[selected_gender])
         gender_input.click()
-        print(f"Clicked the gender option: {selected_gender}")
+        log_success(f"Clicked the gender option: {selected_gender}")
     except Exception as e:
-        print(f"Error clicking the gender option: {e}")
+        log_error(f"Failed to click gender option: {e}")
 
     sleep(0.5)
 
@@ -217,7 +262,7 @@ while True:
     sleep(5)
 
     # Navigate to the specified URL
-    url = "https://open.spotify.com/playlist/3FxsH4NU0U85AltRFy2i2n"  # replace this with your playlist or profile URL
+    url = "https://open.spotify.com/playlist/39lVjuBnWwodTKK1JuleBe"  # replace this with your playlist or profile URL
     driver.get(url)
 
     sleep(2.5)
@@ -260,6 +305,7 @@ while True:
     else:
         print("What the heck is that URL you provided?")
 
+    sleep(4)
     # Close the browser
     driver.quit()
     sleep(2)  # Optional: sleep before the next iteration
